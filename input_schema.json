@@ -27,8 +27,7 @@
         "use_apify_proxy": {
           "type": "boolean",
           "title": "Use Apify Proxy",
-          "description": "Use Apify's proxy service for requests",
-          "default": false
+          "description": "Use Apify's proxy service for requests"
         },
         "apify_proxy_groups": {
           "type": "array",
@@ -99,14 +98,12 @@
           "selector_type": {
             "type": "string",
             "title": "Selector Type",
-            "description": "Type of selector: css, xpath, text, role, or auto",
-            "default": "auto"
+            "description": "Type of selector: css, xpath, text, role, or auto"
           },
           "timeout": {
             "type": "integer",
             "title": "Timeout (ms)",
-            "description": "Maximum time to wait for action completion in milliseconds",
-            "default": 10000
+            "description": "Maximum time to wait for action completion in milliseconds"
           }
         },
         "required": ["type"]

@@ -15,7 +15,10 @@ RUN echo "Python version:" \
  && echo "All installed Python packages:" \
  && pip freeze
 
-# Install Playwright browsers (skip deps as base image has them)
+# Set environment variables for Playwright BEFORE installing browsers
+ENV PLAYWRIGHT_BROWSERS_PATH=/home/myuser/.cache/ms-playwright
+
+# Install Playwright browsers in the correct location
 RUN playwright install chromium
 
 # Copy source code
@@ -24,9 +27,9 @@ COPY --chown=myuser:myuser . ./
 # Compile Python code
 RUN python3 -m compileall -q src/
 
-# Set environment variables for Playwright
-ENV PLAYWRIGHT_BROWSERS_PATH=/home/myuser/.cache/ms-playwright
+# Set unbuffered Python output
 ENV PYTHONUNBUFFERED=1
 
 # Launch the Actor
 CMD ["python3", "-m", "src"]
+

@@ -1,0 +1,107 @@
+{
+  "title": "Playwright MCP Actor Input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "browser_type": {
+      "type": "string",
+      "title": "Browser Type",
+      "description": "Browser to use for automation (chromium, firefox, or webkit)",
+      "default": "chromium"
+    },
+    "headless": {
+      "type": "boolean",
+      "title": "Headless Mode",
+      "description": "Run browser in headless mode (without UI)",
+      "default": true
+    },
+    "proxy": {
+      "type": "object",
+      "title": "Proxy Configuration",
+      "description": "Configure proxy settings for requests",
+      "properties": {
+        "use_apify_proxy": {
+          "type": "boolean",
+          "title": "Use Apify Proxy",
+          "description": "Use Apify's proxy service for requests",
+          "default": false
+        },
+        "apify_proxy_groups": {
+          "type": "array",
+          "title": "Apify Proxy Groups",
+          "description": "Proxy groups to use (e.g., RESIDENTIAL, SHADER, BUYPROXIES94952)",
+          "items": {
+            "type": "string"
+          }
+        },
+        "custom_proxy_url": {
+          "type": "string",
+          "title": "Custom Proxy URL",
+          "description": "Custom proxy server URL (e.g., http://proxy.example.com:8080)"
+        }
+      }
+    },
+    "stealth_mode": {
+      "type": "boolean",
+      "title": "Stealth Mode",
+      "description": "Enable anti-detection features to avoid bot detection",
+      "default": false
+    },
+    "template": {
+      "type": "string",
+      "title": "Pre-built Template",
+      "description": "Use a pre-built template (amazon_product_search, google_search, linkedin_profile, twitter_scrape, google_maps_business)"
+    },
+    "template_params": {
+      "type": "object",
+      "title": "Template Parameters",
+      "description": "Parameters for the selected template (e.g., search_query, max_results)"
+    },
+    "export_format": {
+      "type": "string",
+      "title": "Export Format",
+      "description": "Format to export extracted data (json, csv, or excel)",
+      "enum": ["json", "csv", "excel"],
+      "default": "json"
+    },
+    "actions": {
+      "type": "array",
+      "title": "Automation Actions",
+      "description": "Array of browser automation actions to execute sequentially",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Action Type",
+            "description": "Type of action: navigate, click, fill, select, screenshot, extract_text, etc."
+          },
+          "selector": {
+            "type": "string",
+            "title": "Element Selector",
+            "description": "CSS selector, XPath, or text to identify the element"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value",
+            "description": "Value for the action (URL for navigate, text for fill, etc.)"
+          },
+          "selector_type": {
+            "type": "string",
+            "title": "Selector Type",
+            "description": "Type of selector: css, xpath, text, role, or auto",
+            "default": "auto"
+          },
+          "timeout": {
+            "type": "integer",
+            "title": "Timeout (ms)",
+            "description": "Maximum time to wait for action completion in milliseconds",
+            "default": 10000
+          }
+        },
+        "required": ["type"]
+      }
+    }
+  },
+  "required": ["actions"]
+}

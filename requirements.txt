@@ -1,0 +1,9 @@
+# Apify SDK for Python - Use version 1.x for compatibility
+apify ~= 1.7.0
+
+# Playwright for browser automation
+playwright ~= 1.48.0
+
+# Data processing and export
+pandas ~= 2.2.0
+openpyxl ~= 3.1.0

@@ -1,16 +1,16 @@
 {
-  "actorSpecification": 2,
+  "actorSpecification": 1,
   "name": "playwright-mcp-actor",
   "title": "Playwright MCP - AI Browser Automation",
   "description": "Integrate Playwright with Model Context Protocol for AI-driven browser automation. Control websites using natural language through Claude, ChatGPT, and custom AI agents.",
-  "version": "1.0.0",
+  "version": "1.0",
   "buildTag": "latest",
   "releaseTag": "latest",
   "categories": ["AI", "AUTOMATION", "DEVELOPER_TOOLS"],
   "input": "./input_schema.json",
   "storages": {
     "dataset": {
-      "actorSpecification": 2,
+      "actorSpecification": 1,
       "views": {
         "overview": {
           "title": "Overview",

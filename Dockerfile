@@ -15,9 +15,8 @@ RUN echo "Python version:" \
  && echo "All installed Python packages:" \
  && pip freeze
 
-# Install Playwright browsers
-RUN playwright install chromium \
- && playwright install-deps chromium
+# Install Playwright browsers (skip deps as base image has them)
+RUN playwright install chromium
 
 # Copy source code
 COPY --chown=myuser:myuser . ./

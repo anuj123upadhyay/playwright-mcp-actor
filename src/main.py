@@ -98,6 +98,7 @@ class SelectorType(str, Enum):
 
 
 @dataclass
+@dataclass
 class Action:
     """Represents a single automation action"""
     type: ActionType
@@ -105,6 +106,7 @@ class Action:
     value: Optional[Union[str, int]] = None
     selector_type: SelectorType = SelectorType.AUTO
     timeout: int = 10000
+    description: Optional[str] = None
     metadata: Optional[Dict] = None
     
     def to_dict(self) -> Dict:
@@ -123,15 +125,28 @@ class ActionResult:
     timestamp: str = ""
     
     def to_dict(self) -> Dict:
-        return {
+        """Convert to dict matching dataset schema (flatten action properties)"""
+        result = {
+            "type": self.action.type,
             "success": self.success,
-            "action": self.action.to_dict(),
-            "output": self.output,
-            "error": self.error,
             "execution_time_ms": self.execution_time_ms,
-            "has_screenshot": bool(self.screenshot_base64),
+            "output": self.output,
             "timestamp": self.timestamp
         }
+        
+        # Add optional fields only if they exist
+        if self.action.selector:
+            result["selector"] = self.action.selector
+        if self.action.value:
+            result["value"] = self.action.value
+        if self.action.description:
+            result["description"] = self.action.description
+        if self.error:
+            result["error"] = self.error
+        if self.screenshot_base64:
+            result["has_screenshot"] = True
+            
+        return result
 
 
 # ============================================================================
@@ -701,27 +716,36 @@ class PlaywrightMCPActor:
         """Main entry point for Apify actor"""
         actor_input = await Actor.get_input()
         
-        # Handle missing input
-        if actor_input is None:
-            actor_input = {}
-            logger.warning("⚠️ No input provided, using default demo")
-            # Provide a default demo input
+        # Handle missing or empty input (for Apify automated daily testing)
+        if actor_input is None or not actor_input or (isinstance(actor_input, dict) and not actor_input.get("actions")):
+            logger.info("🤖 No input provided - using default test actions for automated testing")
+            # Provide a comprehensive default demo input for Apify's daily automated runs
             actor_input = {
                 "browser_type": "chromium",
                 "headless": True,
+                "stealth_mode": False,
                 "actions": [
                     {
                         "type": "navigate",
-                        "value": "https://example.com"
+                        "value": "https://example.com",
+                        "description": "Navigate to example.com for testing"
                     },
                     {
-                        "type": "get_title"
+                        "type": "get_title",
+                        "description": "Get page title to verify page load"
                     },
                     {
-                        "type": "screenshot"
+                        "type": "extract_text",
+                        "selector": "h1",
+                        "description": "Extract heading text"
+                    },
+                    {
+                        "type": "screenshot",
+                        "description": "Capture screenshot to verify rendering"
                     }
                 ]
             }
+            logger.info("✓ Loaded 4 default test actions (navigate, get_title, extract_text, screenshot)")
         
         logger.info(f"Received input: {json.dumps(actor_input, indent=2)}")
         
@@ -833,22 +857,21 @@ class PlaywrightMCPActor:
             value=action_data.get("value"),
             selector_type=selector_type,
             timeout=action_data.get("timeout", 10000),
+            description=action_data.get("description"),
             metadata=action_data.get("metadata")
         )
     
     def _prepare_output(self) -> Dict:
-        """Prepare final output"""
+        """Prepare final output matching dataset schema"""
         return {
             "success": self.stats["failed_actions"] == 0,
-            "total_actions": self.stats["total_actions"],
-            "successful_actions": self.stats["successful_actions"],
-            "failed_actions": self.stats["failed_actions"],
-            "total_execution_time_ms": self.stats["total_execution_time_ms"],
-            "average_action_time_ms": (
-                self.stats["total_execution_time_ms"] / self.stats["total_actions"]
-                if self.stats["total_actions"] > 0 else 0
-            ),
-            "screenshots_captured": self.stats["screenshots_captured"],
+            "stats": {
+                "total_actions": self.stats["total_actions"],
+                "successful_actions": self.stats["successful_actions"],
+                "failed_actions": self.stats["failed_actions"],
+                "total_execution_time_ms": self.stats["total_execution_time_ms"],
+                "screenshots_captured": self.stats["screenshots_captured"]
+            },
             "actions": [result.to_dict() for result in self.results],
             "timestamp": datetime.now().isoformat()
         }

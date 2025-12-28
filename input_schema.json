@@ -109,6 +109,5 @@
         "required": ["type"]
       }
     }
-  },
-  "required": ["actions"]
+  }
 }

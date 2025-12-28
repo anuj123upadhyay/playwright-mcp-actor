@@ -26,13 +26,6 @@ This Actor enables AI agents to control browsers through the Model Context Proto
 
 ---
 
-## 💰 Pricing & Value
-
-### Cost Transparency
-- **Free Tier**: 100 runs/month - Perfect for testing and small projects
-- **Pay-As-You-Go**: $0.01-0.05 per run - Only pay for what you use
-- **Average Cost**: $2-5 for 1,000 products scraped (10x cheaper than hiring developers)
-
 ### What You Get with Apify Platform
 | Platform Feature | Benefit |
 |-----------------|---------|
@@ -42,8 +35,6 @@ This Actor enables AI agents to control browsers through the Model Context Proto
 | **Scheduling** | Run daily, hourly, or on-demand |
 | **Monitoring** | Email alerts, success/failure tracking |
 | **Scaling** | Handle 1 or 1 million requests seamlessly |
-
-**ROI Example**: Scraping 10,000 products/month manually = 40 hours @ $50/hr = $2,000. With this Actor = $20-50. **Save 97%** on data collection costs.
 
 ---
 
@@ -104,7 +95,7 @@ This Actor enables AI agents to control browsers through the Model Context Proto
 ### Option 3: Run via Apify API
 
 ```bash
-curl https://api.apify.com/v2/acts/YOUR_USERNAME~playwright-mcp-actor/runs \
+curl https://api.apify.com/v2/acts/aluminum_jam~playwright-mcp-actor/runs \
   -X POST \
   -H "Authorization: Bearer YOUR_API_TOKEN" \
   -H "Content-Type: application/json" \
@@ -324,8 +315,6 @@ Enable `stealth_mode: true` to activate:
 }
 ```
 
-**Schedule**: Run daily to track price changes
-**Cost**: ~$0.50/day for 50 products
 
 ### 2. Lead Generation from Google Maps
 
@@ -345,8 +334,7 @@ Enable `stealth_mode: true` to activate:
 }
 ```
 
-**Result**: Business names, addresses, phone numbers, ratings
-**Cost**: ~$2-3 for 100 businesses
+
 
 ### 3. Social Media Monitoring
 
@@ -446,7 +434,7 @@ Complete multi-step forms:
 ### Integrate with Make.com (Integromat)
 
 1. Add "HTTP Request" module
-2. URL: `https://api.apify.com/v2/acts/YOUR_USERNAME~playwright-mcp-actor/runs`
+2. URL: `\https://api.apify.com/v2/acts/aluminum_jam~playwright-mcp-actor/runs?token=xxxxxxxxxx`
 3. Method: POST
 4. Headers: `Authorization: Bearer YOUR_API_TOKEN`
 5. Body: Your input JSON
@@ -455,7 +443,7 @@ Complete multi-step forms:
 
 1. Use "Webhooks by Zapier" action
 2. Choose "POST" request
-3. URL: `https://api.apify.com/v2/acts/YOUR_USERNAME~playwright-mcp-actor/runs`
+3. URL: `https://api.apify.com/v2/acts/aluminum_jam~playwright-mcp-actor/runs?token=xxxxxxxxx`
 4. Add Authorization header
 5. Map your data to input schema
 
@@ -529,10 +517,10 @@ Complete multi-step forms:
 
 ### Need Help?
 
-1. **GitHub Issues**: [Report bugs or request features](https://github.com/yourrepo/playwright-mcp-actor/issues)
+1. **GitHub Issues**: [Report bugs or request features](https://github.com/anuj123upadhyay/playwright-mcp-actor/issues)
 2. **Apify Forum**: [Community support](https://community.apify.com)
-3. **Email Support**: support@yourdomain.com (for paid users)
-4. **Documentation**: Full API reference at [docs link]
+3. **Email Support**: anuju760@gmail.com (for paid users)
+
 
 ### Known Limitations
 
@@ -601,8 +589,7 @@ Need something more tailored to your business?
 - **Training & Consulting**: Team training on web scraping best practices
 - **Managed Scraping**: We handle everything for you
 
-**Contact**: enterprise@yourdomain.com | [Schedule a Call](https://calendly.com/yourlink)
-
+**Contact**: anuju760@gmail.com 
 ---
 
 ## 📈 Changelog
@@ -622,56 +609,19 @@ Need something more tailored to your business?
 - 🔜 Advanced scheduling options
 - 🔜 Webhook notifications
 
----
-
-## 🏆 Success Stories
-
-> "We reduced our data collection costs by 95% and now scrape 100K products daily with perfect accuracy. This Actor is a game-changer!" - **E-commerce Analytics Company**
-
-> "The Google Maps template saved us 200+ hours of manual research. We generated 5,000+ leads in the first week." - **B2B Sales Agency**
-
-> "Anti-detection mode works flawlessly. We've scraped social media for 6 months without a single block." - **Social Media Marketing Team**
-
----
-
-## 🎯 Get Started Now
-
-1. **[Try Free Demo](https://console.apify.com/actors/YOUR_ACTOR_ID)** - 100 free runs
-2. **[View Pricing](https://apify.com/pricing)** - Plans starting at $49/month
-3. **[API Documentation](https://docs.apify.com)** - Full technical reference
-4. **[Join Community](https://community.apify.com)** - Get help from experts
 
 ---
 
 ## 📞 Contact
 
-- **Email**: support@yourdomain.com
-- **Twitter**: [@yourhandle](https://twitter.com/yourhandle)
-- **GitHub**: [Repository](https://github.com/yourrepo/playwright-mcp-actor)
-- **LinkedIn**: [Company Page](https://linkedin.com/company/yourcompany)
+- **Email**: anuju760@gmail.com
+- **Twitter**: [@anuj123upadhyay](https://x.com/anuj123upadhyay)
+- **GitHub**: [@anuj123upadhyay](https://github.com/anuj123upadhyay/playwright-mcp-actor)
 
 ---
 
-**Made with ❤️ for the Apify community** | [Report Issues](https://github.com/yourrepo/issues) | [Request Features](https://github.com/yourrepo/issues/new) | [⭐ Star on GitHub](https://github.com/yourrepo)
+**Made with ❤️ for the Apify community** | [Report Issues](https://github.com/anuj123upadhyay/playwright-mcp-actor/issues) | [Request Features](https://github.com/anuj123upadhyay/playwright-mcp-actor/issues/new) | [⭐ Star on GitHub](https://github.com/anuj123upadhyay/playwright-mcp-actor)
 
----
-
-## 📚 Additional Resources
-
-### Video Tutorials
-- [Getting Started in 5 Minutes](https://youtube.com/watch?v=example)
-- [Advanced Scraping Techniques](https://youtube.com/watch?v=example)
-- [Template Customization Guide](https://youtube.com/watch?v=example)
-
-### Blog Posts
-- [Ultimate Guide to Web Scraping with AI](https://yourblog.com/guide)
-- [10 Ways to Avoid Getting Blocked](https://yourblog.com/anti-detection)
-- [E-commerce Price Monitoring Strategy](https://yourblog.com/price-monitoring)
-
-### API Reference
-- [Full API Documentation](https://docs.apify.com/api/v2)
-- [Playwright Actions Reference](https://playwright.dev/docs/api/class-page)
-- [MCP Protocol Specification](https://modelcontextprotocol.io)
 
 ---
 

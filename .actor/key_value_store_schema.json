@@ -1,0 +1,19 @@
+{
+  "actorKeyValueStoreSchemaVersion": 1,
+  "title": "Playwright MCP Actor Key-Value Store",
+  "description": "Screenshots and data exports from browser automation",
+  "collections": {
+    "screenshots": {
+      "title": "Screenshots",
+      "description": "Browser screenshots captured during automation",
+      "keyPrefix": "SCREENSHOT_",
+      "contentTypes": ["image/png", "image/jpeg"]
+    },
+    "exports": {
+      "title": "Data Exports",
+      "description": "CSV and Excel exports of extracted data",
+      "keyPrefix": "OUTPUT_",
+      "contentTypes": ["text/csv", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"]
+    }
+  }
+}

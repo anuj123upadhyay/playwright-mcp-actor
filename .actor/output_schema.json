@@ -1,0 +1,44 @@
+{
+  "actorOutputSchemaVersion": 1,
+  "title": "Playwright MCP Actor Output",
+  "description": "Browser automation results including action execution details, screenshots, and optional data exports",
+  "type": "object",
+  "properties": {
+    "overview": {
+      "type": "string",
+      "title": "Overview 📊",
+      "description": "Summary statistics of the automation run",
+      "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+    },
+    "allActions": {
+      "type": "string",
+      "title": "All Actions 🎬",
+      "description": "Complete list of all executed actions with details",
+      "template": "{{links.apiDefaultDatasetUrl}}/items?view=actions"
+    },
+    "successful": {
+      "type": "string",
+      "title": "Successful Actions ✅",
+      "description": "Only successfully executed actions",
+      "template": "{{links.apiDefaultDatasetUrl}}/items?view=successful"
+    },
+    "failed": {
+      "type": "string",
+      "title": "Failed Actions ❌",
+      "description": "Failed actions with error details",
+      "template": "{{links.apiDefaultDatasetUrl}}/items?view=failed"
+    },
+    "screenshots": {
+      "type": "string",
+      "title": "Screenshots �",
+      "description": "Captured screenshots from browser automation",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/keys?collection=screenshots"
+    },
+    "exports": {
+      "type": "string",
+      "title": "Data Exports �",
+      "description": "CSV and Excel exports of extracted data",
+      "template": "{{links.apiDefaultKeyValueStoreUrl}}/keys?collection=exports"
+    }
+  }
+}

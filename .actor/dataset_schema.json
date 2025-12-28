@@ -1,0 +1,258 @@
+{
+  "actorSpecification": 1,
+  "fields": {
+    "type": "object",
+    "properties": {
+      "success": {
+        "type": "boolean",
+        "description": "Whether the entire Actor run was successful"
+      },
+      "stats": {
+        "type": "object",
+        "properties": {
+          "total_actions": {
+            "type": "integer",
+            "description": "Total number of actions executed"
+          },
+          "successful_actions": {
+            "type": "integer",
+            "description": "Number of successfully executed actions"
+          },
+          "failed_actions": {
+            "type": "integer",
+            "description": "Number of failed actions"
+          },
+          "total_execution_time_ms": {
+            "type": "number",
+            "description": "Total execution time in milliseconds"
+          },
+          "screenshots_captured": {
+            "type": "integer",
+            "description": "Number of screenshots captured"
+          }
+        }
+      },
+      "actions": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Action type (navigate, click, screenshot, etc.)"
+            },
+            "selector": {
+              "type": "string",
+              "description": "Element selector used for the action"
+            },
+            "success": {
+              "type": "boolean",
+              "description": "Whether the action was successful"
+            },
+            "execution_time_ms": {
+              "type": "number",
+              "description": "Action execution time in milliseconds"
+            },
+            "output": {
+              "description": "Output data from the action"
+            },
+            "error": {
+              "type": "string",
+              "description": "Error message if action failed"
+            },
+            "timestamp": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Action execution timestamp"
+            }
+          }
+        }
+      },
+      "timestamp": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Run completion timestamp"
+      }
+    }
+  },
+  "views": {
+    "overview": {
+      "title": "Overview",
+      "description": "Summary of the automation run",
+      "transformation": {
+        "fields": [
+          "success",
+          "stats.total_actions",
+          "stats.successful_actions",
+          "stats.failed_actions",
+          "stats.total_execution_time_ms",
+          "stats.screenshots_captured",
+          "timestamp"
+        ],
+        "flatten": ["stats"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "success": {
+            "label": "Success",
+            "format": "boolean"
+          },
+          "stats.total_actions": {
+            "label": "Total Actions",
+            "format": "number"
+          },
+          "stats.successful_actions": {
+            "label": "Successful",
+            "format": "number"
+          },
+          "stats.failed_actions": {
+            "label": "Failed",
+            "format": "number"
+          },
+          "stats.total_execution_time_ms": {
+            "label": "Execution Time (ms)",
+            "format": "number"
+          },
+          "stats.screenshots_captured": {
+            "label": "Screenshots",
+            "format": "number"
+          },
+          "timestamp": {
+            "label": "Completed At",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "actions": {
+      "title": "Actions",
+      "description": "Detailed list of all executed actions",
+      "transformation": {
+        "fields": [
+          "type",
+          "selector",
+          "success",
+          "execution_time_ms",
+          "output",
+          "error",
+          "timestamp"
+        ],
+        "unwind": ["actions"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "Action Type",
+            "format": "text"
+          },
+          "selector": {
+            "label": "Selector",
+            "format": "text"
+          },
+          "success": {
+            "label": "Success",
+            "format": "boolean"
+          },
+          "execution_time_ms": {
+            "label": "Time (ms)",
+            "format": "number"
+          },
+          "output": {
+            "label": "Output",
+            "format": "text"
+          },
+          "error": {
+            "label": "Error",
+            "format": "text"
+          },
+          "timestamp": {
+            "label": "Timestamp",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "successful": {
+      "title": "Successful Actions",
+      "description": "Only successfully executed actions",
+      "transformation": {
+        "fields": [
+          "type",
+          "selector",
+          "execution_time_ms",
+          "output",
+          "timestamp"
+        ],
+        "unwind": ["actions"],
+        "omit": ["success", "error"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "Action Type",
+            "format": "text"
+          },
+          "selector": {
+            "label": "Selector",
+            "format": "text"
+          },
+          "execution_time_ms": {
+            "label": "Time (ms)",
+            "format": "number"
+          },
+          "output": {
+            "label": "Output",
+            "format": "text"
+          },
+          "timestamp": {
+            "label": "Timestamp",
+            "format": "date"
+          }
+        }
+      }
+    },
+    "failed": {
+      "title": "Failed Actions",
+      "description": "Only failed actions with error details",
+      "transformation": {
+        "fields": [
+          "type",
+          "selector",
+          "error",
+          "execution_time_ms",
+          "timestamp"
+        ],
+        "unwind": ["actions"],
+        "omit": ["success", "output"]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "type": {
+            "label": "Action Type",
+            "format": "text"
+          },
+          "selector": {
+            "label": "Selector",
+            "format": "text"
+          },
+          "error": {
+            "label": "Error Message",
+            "format": "text"
+          },
+          "execution_time_ms": {
+            "label": "Time (ms)",
+            "format": "number"
+          },
+          "timestamp": {
+            "label": "Timestamp",
+            "format": "date"
+          }
+        }
+      }
+    }
+  }
+}
